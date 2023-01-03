@@ -1,0 +1,66 @@
+linters-settings:
+  funlen:
+    lines: 80
+    statements: 80
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  gocyclo:
+    min-complexity: 20
+  golint:
+    min-confidence: 0
+  govet:
+    check-shadowing: true
+  lll:
+    line-length: 120
+  errcheck: 
+    check-type-assertions: true
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - funlen
+    - goconst
+    - gocyclo
+    - gofmt
+    - ineffassign
+    - staticcheck
+    - structcheck
+    - typecheck
+    - goimports
+    - golint
+    - gosimple
+    - govet
+    - lll
+    - rowserrcheck
+    - errcheck
+    - unused
+    - varcheck
+
+run:
+  skip-dirs:
+      # - test/testdata_etc
+
+service:
+  golangci-lint-version: 1.50.1
+
+issues:
+  exclude-rules:
+    - linters:
+        - structcheck
+        - unused
+      text: "`data` is unused"
+    - linters:
+        - staticcheck
+      text: "SA1019:"
+    - linters:
+        - revive
+      text: "var-naming:"
+    - linters:
+        - revive
+      text: "exported:"
+    - path: _test\.go
+      linters:
+        - gosec # security is not make sense in tests
